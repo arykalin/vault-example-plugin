@@ -23,11 +23,6 @@ func examplePaths(b *backend) []*framework.Path {
 			Fields: map[string]*framework.FieldSchema{
 				"user": &framework.FieldSchema{
 					Type: framework.TypeString},
-				"comment": &framework.FieldSchema{
-					Type:        framework.TypeString,
-					Description: "example user description",
-					Default:     "empty",
-					Required:    false},
 				"password": &framework.FieldSchema{Type: framework.TypeString},
 				"generate": &framework.FieldSchema{Type: framework.TypeBool},
 			},
@@ -84,7 +79,6 @@ func (b *backend) pathExampleCreateUpdate(ctx context.Context, req *logical.Requ
 			return nil, fmt.Errorf("Must provide password or generate\n")
 		}
 	}
-	comment := data.Get("comment").(string)
 	user := data.Get("user").(string)
 
 	b.Logger().Info("storing password", "user", req.Path, "password", password)
@@ -103,7 +97,6 @@ func (b *backend) pathExampleCreateUpdate(ctx context.Context, req *logical.Requ
 		Data: map[string]interface{}{
 			"user":     user,
 			"password": password,
-			"comment":  comment,
 		},
 	}, nil
 }
