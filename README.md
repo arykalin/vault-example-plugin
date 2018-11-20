@@ -1,1 +1,1 @@
-This is an example Vault plugin. 
+This is an example Vault plugin build up on the vaul mock plugin: https://github.com/hashicorp/vault/tree/master/logical/plugin/mock
