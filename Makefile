@@ -76,6 +76,9 @@ dev_test:
 	vault read $(MOUNT)/user/user2
 	@echo "Listing users:"
 	vault list $(MOUNT)/users
+	vault delete $(MOUNT)/user/user1
+	vault list $(MOUNT)/users
+	vault write $(MOUNT)/user/user2 password=MySecret13
 
 #Production server tasks
 prod_server_up:
