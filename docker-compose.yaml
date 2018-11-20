@@ -24,7 +24,7 @@ services:
     ports:
     - "8200:8200"
     volumes:
-      - ./bin/linux:/vault_plugin
+      - ./bin/:/vault_plugin
       - ./scripts/config/vault:/config
       - ./Makefile:/Makefile
       - ./scripts/tools:/tools

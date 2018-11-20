@@ -113,7 +113,7 @@ prod_server_sh:
 prod: prod_server_down prod_server_up prod_server_init prod_server_unseal prod_server_auth mount_prod
 	@echo "Vault started. To run make command export VAULT_TOKEN variable and run make with -e flag, for example:"
 	@echo "export VAULT_TOKEN=enter-root-token-here"
-	@echo "make cloud -e"
+	@echo "make dev_test -e"
 
 mount_prod:
 	$(eval SHA256 := $(shell echo $$($(DOCKER_CMD) $(SHA256_DOCKER_CMD))))
