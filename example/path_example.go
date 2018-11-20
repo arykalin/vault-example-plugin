@@ -29,7 +29,6 @@ func examplePaths(b *backend) []*framework.Path {
 					Default:     "empty",
 					Required:    false},
 				"password": &framework.FieldSchema{Type: framework.TypeString},
-				"version":  &framework.FieldSchema{Type: framework.TypeInt},
 				"generate": &framework.FieldSchema{Type: framework.TypeBool},
 			},
 			ExistenceCheck: b.pathExampleExistenceCheck,
@@ -53,7 +52,6 @@ func (b *backend) pathExampleExistenceCheck(ctx context.Context, req *logical.Re
 }
 
 func (b *backend) pathExampleRead(ctx context.Context, req *logical.Request, data *framework.FieldData) (*logical.Response, error) {
-	version := data.Get("version").(int)
 
 	entry, err := req.Storage.Get(ctx, req.Path)
 	if err != nil {
@@ -71,11 +69,7 @@ func (b *backend) pathExampleRead(ctx context.Context, req *logical.Request, dat
 	resp := &logical.Response{
 		Data: map[string]interface{}{
 			"password": password,
-			"version":  version,
 		},
-	}
-	if version != 0 {
-		resp.Data["version"] = version
 	}
 	return resp, nil
 }
