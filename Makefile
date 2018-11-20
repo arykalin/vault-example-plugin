@@ -68,8 +68,14 @@ mount_dev: unset
 	vault secrets disable $(MOUNT) || echo "Secrets already disabled"
 	vault secrets enable -path=$(MOUNT) -plugin-name=$(PLUGIN_NAME) plugin
 
-dev_write:
-	vault create $(MOUNT)/user user=testuser comment=testcomment
+dev_test:
+	vault write $(MOUNT)/user/user1 password=MySecret12
+	vault write $(MOUNT)/user/user2 generate=true
+	vault write $(MOUNT)/user/user3 generate=false || echo "Error"
+	vault read $(MOUNT)/user/user1
+	vault read $(MOUNT)/user/user2
+	@echo "Listing users:"
+	vault list $(MOUNT)/users
 
 #Production server tasks
 prod_server_up:
