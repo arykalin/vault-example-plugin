@@ -13,10 +13,9 @@ services:
   vault:
     depends_on:
     - consul
-    #   Venafi plugin image
-    image: "vault:0.11.5"
-    #   Uncomment if you want to use compose in dev mode
-    #    build: .
+#    image: "vault:0.11.5"
+#    Unfortuntely vault docker have no glibc and don't support plugins. https://github.com/immutability-io/vault-ethereum/issues/2
+    build: .
     hostname: "vault"
     links:
     - "consul:consul"
