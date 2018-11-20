@@ -76,7 +76,7 @@ prod_server_up:
 	@echo "Run: docker exec -it $(VAULT_CONT) sh"
 	@echo "to login into vault container"
 	@echo "Waiting until server start"
-	sleep 10
+	sleep 4
 
 
 prod_server_init:
@@ -108,6 +108,7 @@ prod: prod_server_down prod_server_up prod_server_init prod_server_unseal prod_s
 
 mount_prod:
 	$(eval SHA256 := $(shell echo $$($(DOCKER_CMD) $(SHA256_DOCKER_CMD))))
+	echo $$SHA256
 	$(VAULT_CMD) write sys/plugins/catalog/$(PLUGIN_NAME) sha_256="$$SHA256" command="$(PLUGIN_NAME)"
 	$(VAULT_CMD) secrets disable $(MOUNT) || echo "Secrets already disabled"
 	$(VAULT_CMD) secrets enable -path=$(MOUNT) -plugin-name=$(PLUGIN_NAME) plugin
