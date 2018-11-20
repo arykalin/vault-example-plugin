@@ -1,1 +1,1 @@
-# vault-example-plugin
+This is an example Vault plugin. 
