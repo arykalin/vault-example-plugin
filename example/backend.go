@@ -41,6 +41,7 @@ func Backend() *backend {
 	b.Backend = &framework.Backend{
 		Help: "",
 		Paths: framework.PathAppend(
+			examplePaths(&b),
 			errorPaths(&b),
 			kvPaths(&b),
 			[]*framework.Path{

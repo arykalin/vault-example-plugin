@@ -68,6 +68,9 @@ mount_dev: unset
 	vault secrets disable $(MOUNT) || echo "Secrets already disabled"
 	vault secrets enable -path=$(MOUNT) -plugin-name=$(PLUGIN_NAME) plugin
 
+dev_write:
+	vault create $(MOUNT)/user user=testuser comment=testcomment
+
 #Production server tasks
 prod_server_up:
 	docker-compose up -d
