@@ -13,9 +13,7 @@ services:
   vault:
     depends_on:
     - consul
-#    image: "vault:0.11.5"
-#    Unfortuntely vault docker have no glibc and don't support plugins. https://github.com/immutability-io/vault-ethereum/issues/2
-    build: .
+    image: "vault:0.11.5"
     hostname: "vault"
     links:
     - "consul:consul"
@@ -24,7 +22,7 @@ services:
     ports:
     - "8200:8200"
     volumes:
-      - ./bin/:/vault_plugin
+      - ./bin/linux:/vault_plugin
       - ./scripts/config/vault:/config
       - ./Makefile:/Makefile
       - ./scripts/tools:/tools
